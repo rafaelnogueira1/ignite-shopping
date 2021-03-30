@@ -22,7 +22,7 @@ const Cart = (): JSX.Element => {
 
   const cartFormatted = cart.map((product) => ({
     ...product,
-    price: formatPrice(product.price),
+    priceFormated: formatPrice(product.price),
     subTotal: formatPrice(product.price * product.amount),
   }));
   const total = formatPrice(
@@ -33,21 +33,17 @@ const Cart = (): JSX.Element => {
   );
 
   function handleProductIncrement(product: Product) {
-    const data = {
+    updateProductAmount({
       productId: product.id,
       amount: product.amount + 1
-    };
-
-    updateProductAmount(data);
+    });
   }
 
   function handleProductDecrement(product: Product) {
-    const data = {
+    updateProductAmount({
       productId: product.id,
       amount: product.amount - 1
-    };
-
-    updateProductAmount(data);
+    });
   }
 
   function handleRemoveProduct(productId: number) {
@@ -74,7 +70,7 @@ const Cart = (): JSX.Element => {
               </td>
               <td>
                 <strong>{product.title}</strong>
-                <span>{product.price}</span>
+                <span>{product.priceFormated}</span>
               </td>
               <td>
                 <div>
@@ -82,7 +78,7 @@ const Cart = (): JSX.Element => {
                     type='button'
                     data-testid='decrement-product'
                     disabled={product.amount <= 1}
-                    onClick={() => handleProductDecrement(cart[index])}
+                    onClick={() => handleProductDecrement(product)}
                   >
                     <MdRemoveCircleOutline size={20} />
                   </button>
@@ -95,7 +91,7 @@ const Cart = (): JSX.Element => {
                   <button
                     type='button'
                     data-testid='increment-product'
-                    onClick={() => handleProductIncrement(cart[index])}
+                    onClick={() => handleProductIncrement(product)}
                   >
                     <MdAddCircleOutline size={20} />
                   </button>

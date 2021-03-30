@@ -39,7 +39,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         (product) => product.id === productId
       );
 
-      const stock = await api.get(`stock/${productId}`);
+      const stock = await api.get<Stock>(`stock/${productId}`);
 
       const amountProductInStock = stock.data.amount;
       const currentAmount = productAlreadyInCart
@@ -95,7 +95,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         return;
       }
 
-      const stock = await api.get(`stock/${productId}`);
+      const stock = await api.get<Stock>(`stock/${productId}`);
 
       const amountProductInStock = stock.data.amount;
 
