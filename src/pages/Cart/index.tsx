@@ -76,7 +76,7 @@ const Cart = (): JSX.Element => {
                 <div>
                   <button
                     type='button'
-                    data-testid='decrement-product'
+                    data-testid='decrement'
                     disabled={product.amount <= 1}
                     onClick={() => handleProductDecrement(product)}
                   >
